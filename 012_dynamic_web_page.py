@@ -52,10 +52,10 @@ driver.find_element(By.ID, 'li_LPPSRC020').click()  # 계약체결/조회 메뉴
 # 정해진 시간동안 pause
 # driver.implicitly_wait(20)
 
-select = Select(driver.find_element(By.ID, 'schStatCd')) # 계약상태 리스트박스 선택
-select.select_by_index(0)
+select = Select(driver.find_element(By.NAME, 'schStatCd')) # 계약상태 리스트박스 선택
+select.select_by_index(4)
 
-driver.get("https://partnerplus.lgcns.com/lpp/co/cont/initContPCList")
+# driver.get("https://partnerplus.lgcns.com/lpp/co/cont/initContPCList")
 # select = Select(driver.find_element_by_id('schStatCd')) # 계약상태 리스트박스 선택
 # select.select_by_index(0)
 
@@ -67,6 +67,9 @@ driver.get("https://partnerplus.lgcns.com/lpp/co/cont/initContPCList")
 
 # elem2 = driver.find_element_by_name('schStatCd')       # 계약번호 선택
 # elem2.send_keys("계약체결")
+
+# 정해진 시간동안 pause
+driver.implicitly_wait(20)
 
 # # 계약상태 > '계약체결' 선택
 # sel1 = Select(driver.find_element_by_id('schStatCd'))
