@@ -30,12 +30,18 @@ driver.find_element(By.CLASS_NAME, 'btn.btn-primary.btn-login').click()
 # print("문자열: ", login.text)
 # print("href 속성: ", login.get_attribute('href'))
 
+# 창 리스트를 담아서
 tabs = driver.window_handles
 
+# 0은 main창, 1이상은 팝업창
 driver.switch_to.window(tabs[1])
 driver.close()
 
+# main창으로 반드시 돌아와야 함
 driver.switch_to.window(tabs[0])
 
+# 정해진 시간동안 pause
 driver.implicitly_wait(10)
-driver.find_element(By.CSS_SELECTOR, "LPPSRC020").click()
+
+# 메뉴 항목 중 
+driver.find_element(By.LINK_TEXT, '계약체결/조회').click()
