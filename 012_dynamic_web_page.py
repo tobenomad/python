@@ -30,8 +30,12 @@ driver.find_element(By.CLASS_NAME, 'btn.btn-primary.btn-login').click()
 # print("문자열: ", login.text)
 # print("href 속성: ", login.get_attribute('href'))
 
-login.click()
+tabs = driver.window_handles
+
+driver.switch_to.window(tabs[1])
+driver.close()
+
+driver.switch_to.window(tabs[0])
 
 driver.implicitly_wait(10)
-
-driver.find_element(By.id, "LPRSRC").click()
+driver.find_element(By.CSS_SELECTOR, "LPPSRC020").click()
