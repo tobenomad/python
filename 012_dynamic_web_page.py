@@ -32,6 +32,6 @@ driver.find_element(By.CLASS_NAME, 'btn.btn-primary.btn-login').click()
 
 login.click()
 
-driver.implicitly_wait(5)
+driver.implicitly_wait(10)
 
-driver.quit()
+driver.find_element(By.id, "LPRSRC").click()
