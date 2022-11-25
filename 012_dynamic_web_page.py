@@ -52,8 +52,14 @@ driver.find_element(By.ID, 'li_LPPSRC020').click()  # 계약체결/조회 메뉴
 # 정해진 시간동안 pause
 # driver.implicitly_wait(20)
 
-select = Select(driver.find_element(By.NAME, 'schStatCd')) # 계약상태 리스트박스 선택
-select.select_by_index(4)
+# select = Select(driver.find_element(By.XPATH, "//ul[@class = 'select2-results__options']"))
+
+# Select(driver.find_element(By.XPATH, "//li[@class = 'select2-results__options']"))
+# select = Select(driver.find_element(By.XPATH, "//ul[@class='select2-results__options']/span[@class='select2-selection__placeholder']"))
+                                    
+# select.select_by_index(4)
+
+driver.find_element(By.ID, 'searchBtn').click()  # 계약체결/조회 메뉴 클릭
 
 # driver.get("https://partnerplus.lgcns.com/lpp/co/cont/initContPCList")
 # select = Select(driver.find_element_by_id('schStatCd')) # 계약상태 리스트박스 선택
