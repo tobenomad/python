@@ -45,39 +45,25 @@ driver.switch_to.window(tabs[0])
 # 정해진 시간동안 pause
 # driver.implicitly_wait(10)
 
-# 메뉴 항목 중 
+# 메뉴 항목 중 계약체결/조회 메뉴 클릭
 driver.find_element(By.ID, 'li_LPPSRC').click()     # 견적 및 계약 메뉴 클릭
 driver.find_element(By.ID, 'li_LPPSRC020').click()  # 계약체결/조회 메뉴 클릭
-
-# 정해진 시간동안 pause
-# driver.implicitly_wait(20)
-
-# select = Select(driver.find_element(By.XPATH, "//ul[@class = 'select2-results__options']"))
-
-# Select(driver.find_element(By.XPATH, "//li[@class = 'select2-results__options']"))
-# select = Select(driver.find_element(By.XPATH, "//ul[@class='select2-results__options']/span[@class='select2-selection__placeholder']"))
-                                    
-# select.select_by_index(4)
-
-driver.find_element(By.ID, 'searchBtn').click()  # 계약체결/조회 메뉴 클릭
+#driver.find_element(By.ID, 'searchBtn').click()  # 계약체결/조회 메뉴 클릭
 
 # driver.get("https://partnerplus.lgcns.com/lpp/co/cont/initContPCList")
-# select = Select(driver.find_element_by_id('schStatCd')) # 계약상태 리스트박스 선택
-# select.select_by_index(0)
+#driver.find_element(By.ID, 'schStatCd').click()
+
+driver.switch_to.frame('legacy-content-frame')
+
+
+select = Select(driver.find_element(By.ID, 'schStatCd')) # 계약상태 리스트박스 선택
+select.select_by_visible_text('발주완료')
+driver.find_element(By.ID, 'searchBtn').click()  # 계약체결/조회 메뉴 클릭
+
 
 # 계약번호 입력 > 검색
 # elem2 = driver.find_element_by_name('txtContNo')       # 계약번호 선택
 # elem2.send_keys('C000058497-2')                   # 계약번호 입력
-# driver.find_element_by_id('searchBtn').click()
-
-
-# elem2 = driver.find_element_by_name('schStatCd')       # 계약번호 선택
-# elem2.send_keys("계약체결")
 
 # 정해진 시간동안 pause
 driver.implicitly_wait(20)
-
-# # 계약상태 > '계약체결' 선택
-# sel1 = Select(driver.find_element_by_id('schStatCd'))
-
-# sel1.select_by_visible_text("-- 전체 --")
