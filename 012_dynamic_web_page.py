@@ -1,9 +1,16 @@
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option("excludeSwitches", ["enable-logging"])
+browser = webdriver.Chrome(options=options)
 
 driver = webdriver.Chrome("/Users/haku/Downloads/chromdrver")
-driver.implicitly_wait(3)
+# driver.implicitly_wait(3)
 driver.get("https://partnerplus.lgcns.com/")
 
 user_id = 'dev2018788'
@@ -36,34 +43,50 @@ driver.find_element(By.CLASS_NAME, 'btn.btn-primary.btn-login').click()
 tabs = driver.window_handles
 
 # 0은 main창, 1이상은 팝업창
-driver.switch_to.window(tabs[1])
-driver.close()
+# driver.switch_to.window(tabs[1])
+# driver.close()
 
 # main창으로 반드시 돌아와야 함
 driver.switch_to.window(tabs[0])
 
 # 정해진 시간동안 pause
-# driver.implicitly_wait(10)
+driver.implicitly_wait(10)
 
 # 메뉴 항목 중 계약체결/조회 메뉴 클릭
 driver.find_element(By.ID, 'li_LPPSRC').click()     # 견적 및 계약 메뉴 클릭
 driver.find_element(By.ID, 'li_LPPSRC020').click()  # 계약체결/조회 메뉴 클릭
 #driver.find_element(By.ID, 'searchBtn').click()  # 계약체결/조회 메뉴 클릭
 
-# driver.get("https://partnerplus.lgcns.com/lpp/co/cont/initContPCList")
-#driver.find_element(By.ID, 'schStatCd').click()
+# 정해진 시간동안 pause
+# driver.implicitly_wait(10)
+# time.sleep(3)
 
+# # 계약상태 클릭 전 iFRAME내로 이동
 driver.switch_to.frame('legacy-content-frame')
 
+# # 계약상태 클릭
+driver.find_element(By.XPATH, '//*[@id="schForm"]/section/article/div[1]/div[4]/span').click()
 
-select = Select(driver.find_element(By.ID, 'schStatCd')) # 계약상태 리스트박스 선택
-select.select_by_visible_text('발주완료')
-driver.find_element(By.ID, 'searchBtn').click()  # 계약체결/조회 메뉴 클릭
+# # 계약상태창에 키워드 입력전 대기 ( 드롭다운 데이터 출력 대기)
+time.sleep(0.3)
 
+# # 계약상태창에 발주완료 입력
+driver.find_element(By.CLASS_NAME, 'select2-search__field').send_keys('발주완료')
 
-# 계약번호 입력 > 검색
-# elem2 = driver.find_element_by_name('txtContNo')       # 계약번호 선택
-# elem2.send_keys('C000058497-2')                   # 계약번호 입력
+# # 발주완료 관련 드롭다운 리스트 출력 대기 
+time.sleep(0.3)
 
-# 정해진 시간동안 pause
-driver.implicitly_wait(20)
+# #발주완료 검색을 위한 엔터
+driver.find_element(By.CLASS_NAME, 'select2-search__field').send_keys(Keys.ENTER)
+
+# # 검색버튼 클릭
+driver.find_element(By.XPATH, '//*[@id="searchBtn"]').click()
+
+# # 계약번호 입력 > 검색
+# # elem2 = driver.find_element_by_name('txtContNo')       # 계약번호 선택
+# # elem2.send_keys('C000058497-2')                   # 계약번호 입력
+
+# # 정해진 시간동안 pause
+# # driver.implicitly_wait(20)
+
+time.sleep(10)
